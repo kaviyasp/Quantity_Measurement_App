@@ -80,55 +80,55 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightEquality_KgToKg_SameValue() {
-        var w1 = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var w2 = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        var w1 = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var w2 = new Quantity(1.0, WeightUnit.KILOGRAM);
 
         assertEquals(w1, w2);
     }
 
     @Test
     void testWeightEquality_KgToKg_DifferentValue() {
-        var w1 = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var w2 = new QuantityWeight(2.0, WeightUnit.KILOGRAM);
+        var w1 = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var w2 = new Quantity(2.0, WeightUnit.KILOGRAM);
 
         assertNotEquals(w1, w2);
     }
 
     @Test
     void testWeightEquality_KgToGram() {
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var gram = new QuantityWeight(1000.0, WeightUnit.GRAM);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var gram = new Quantity(1000.0, WeightUnit.GRAM);
 
         assertEquals(kg, gram);
     }
 
     @Test
     void testWeightEquality_GramToKg() {
-        var gram = new QuantityWeight(1000.0, WeightUnit.GRAM);
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        var gram = new Quantity(1000.0, WeightUnit.GRAM);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
 
         assertEquals(gram, kg);
     }
 
     @Test
     void testWeightEquality_KgToPound() {
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var pound = new QuantityWeight(2.20462, WeightUnit.POUND);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var pound = new Quantity(2.20462, WeightUnit.POUND);
 
         assertEquals(kg, pound);
     }
 
     @Test
     void testWeightEquality_ZeroValue() {
-        var kg = new QuantityWeight(0.0, WeightUnit.KILOGRAM);
-        var gram = new QuantityWeight(0.0, WeightUnit.GRAM);
+        var kg = new Quantity(0.0, WeightUnit.KILOGRAM);
+        var gram = new Quantity(0.0, WeightUnit.GRAM);
 
         assertEquals(kg, gram);
     }
 
     @Test
     void testWeightConversion_KgToGram() {
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
         var result = kg.convertTo(WeightUnit.GRAM);
 
         assertEquals(1000.0, result.getValue(), EPSILON);
@@ -136,7 +136,7 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightConversion_PoundToKg() {
-        var pound = new QuantityWeight(2.20462, WeightUnit.POUND);
+        var pound = new Quantity(2.20462, WeightUnit.POUND);
         var result = pound.convertTo(WeightUnit.KILOGRAM);
 
         assertEquals(1.0, result.getValue(), 1e-3);
@@ -144,7 +144,7 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightConversion_RoundTrip() {
-        var kg = new QuantityWeight(1.5, WeightUnit.KILOGRAM);
+        var kg = new Quantity(1.5, WeightUnit.KILOGRAM);
         var gram = kg.convertTo(WeightUnit.GRAM);
         var backToKg = gram.convertTo(WeightUnit.KILOGRAM);
 
@@ -153,8 +153,8 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightAddition_SameUnit() {
-        var w1 = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var w2 = new QuantityWeight(2.0, WeightUnit.KILOGRAM);
+        var w1 = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var w2 = new Quantity(2.0, WeightUnit.KILOGRAM);
 
         var result = w1.add(w2);
 
@@ -163,8 +163,8 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightAddition_CrossUnit_KgPlusGram() {
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var gram = new QuantityWeight(1000.0, WeightUnit.GRAM);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var gram = new Quantity(1000.0, WeightUnit.GRAM);
 
         var result = kg.add(gram);
 
@@ -173,8 +173,8 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightAddition_ExplicitTargetUnit() {
-        var kg = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
-        var gram = new QuantityWeight(1000.0, WeightUnit.GRAM);
+        var kg = new Quantity(1.0, WeightUnit.KILOGRAM);
+        var gram = new Quantity(1000.0, WeightUnit.GRAM);
 
         var result = kg.add(gram, WeightUnit.GRAM);
 
@@ -183,8 +183,8 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightAddition_NegativeValue() {
-        var w1 = new QuantityWeight(5.0, WeightUnit.KILOGRAM);
-        var w2 = new QuantityWeight(-2000.0, WeightUnit.GRAM);
+        var w1 = new Quantity(5.0, WeightUnit.KILOGRAM);
+        var w2 = new Quantity(-2000.0, WeightUnit.GRAM);
 
         var result = w1.add(w2);
 
@@ -193,7 +193,7 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightVsLength_Incompatible() {
-        var weight = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        var weight = new Quantity(1.0, WeightUnit.KILOGRAM);
         var length = new QuantityMeasurementApp.Quantity(1.0, LengthUnit.FEET);
 
         assertNotEquals(weight, length);
@@ -201,7 +201,7 @@ public class QuantityMeasurementAppTest {
 
     @Test
     void testWeightNullComparison() {
-        var weight = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        var weight = new Quantity(1.0, WeightUnit.KILOGRAM);
 
         assertNotEquals(weight, null);
     }

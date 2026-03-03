@@ -1,10 +1,6 @@
 package com.bridgelabz;
 
-/**
- * Standalone WeightUnit enum.
- * Base unit: KILOGRAM
- */
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable {
 
     KILOGRAM(1.0),
     GRAM(0.001),
@@ -16,15 +12,23 @@ public enum WeightUnit {
         this.conversionFactorToKilogram = conversionFactorToKilogram;
     }
 
+    @Override
+    public double getConversionFactor() {
+        return conversionFactorToKilogram;
+    }
+
+    @Override
     public double convertToBaseUnit(double value) {
         return value * conversionFactorToKilogram;
     }
 
+    @Override
     public double convertFromBaseUnit(double baseValue) {
         return baseValue / conversionFactorToKilogram;
     }
 
-    public double getConversionFactor() {
-        return conversionFactorToKilogram;
+    @Override
+    public String getUnitName() {
+        return name();
     }
 }
