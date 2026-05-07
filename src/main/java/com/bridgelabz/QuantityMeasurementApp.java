@@ -2,7 +2,8 @@ package com.bridgelabz;
 
 import com.bridgelabz.controller.QuantityMeasurementController;
 import com.bridgelabz.dto.QuantityDTO;
-import com.bridgelabz.repository.QuantityMeasurementCacheRepository;
+import com.bridgelabz.repository.IQuantityMeasurementRepository;
+import com.bridgelabz.repository.QuantityMeasurementDatabaseRepository;
 import com.bridgelabz.service.IQuantityMeasurementService;
 import com.bridgelabz.service.QuantityMeasurementServiceImpl;
 
@@ -10,8 +11,8 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        QuantityMeasurementCacheRepository repository =
-                QuantityMeasurementCacheRepository.getInstance();
+        IQuantityMeasurementRepository repository =
+                new QuantityMeasurementDatabaseRepository();
 
         IQuantityMeasurementService service =
                 new QuantityMeasurementServiceImpl(repository);
@@ -49,15 +50,9 @@ public class QuantityMeasurementApp {
                 "FEET"
         );
 
-        controller.performSubtraction(
-                length1,
-                length2,
-                "INCH"
-        );
-
-        controller.performDivision(
-                length1,
-                length2
+        System.out.println(
+                "Total Measurements Stored : "
+                        + repository.getTotalCount()
         );
     }
 }

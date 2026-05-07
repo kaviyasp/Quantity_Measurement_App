@@ -1,5 +1,6 @@
 package com.bridgelabz.controller;
 
+import com.bridgelabz.Quantity;
 import com.bridgelabz.dto.QuantityDTO;
 import com.bridgelabz.service.IQuantityMeasurementService;
 
@@ -14,57 +15,77 @@ public class QuantityMeasurementController {
     }
 
     public void performComparison(
-            QuantityDTO q1,
-            QuantityDTO q2
+            QuantityDTO dto1,
+            QuantityDTO dto2
     ) {
 
-        boolean result = service.compare(q1, q2);
+        boolean result =
+                service.compare(dto1, dto2);
 
-        System.out.println("Comparison Result : " + result);
+        System.out.println(
+                "Comparison Result : " + result
+        );
     }
 
     public void performConversion(
-            QuantityDTO q,
-            String target
+            QuantityDTO dto,
+            String targetUnit
     ) {
 
-        QuantityDTO result = service.convert(q, target);
+        Quantity<?> result =
+                service.convert(dto, targetUnit);
 
-        System.out.println("Converted : " + result);
+        System.out.println(
+                "Conversion Result : " + result
+        );
     }
 
     public void performAddition(
-            QuantityDTO q1,
-            QuantityDTO q2,
-            String target
+            QuantityDTO dto1,
+            QuantityDTO dto2,
+            String targetUnit
     ) {
 
-        QuantityDTO result =
-                service.add(q1, q2, target);
+        Quantity<?> result =
+                service.add(
+                        dto1,
+                        dto2,
+                        targetUnit
+                );
 
-        System.out.println("Addition Result : " + result);
+        System.out.println(
+                "Addition Result : " + result
+        );
     }
 
     public void performSubtraction(
-            QuantityDTO q1,
-            QuantityDTO q2,
-            String target
+            QuantityDTO dto1,
+            QuantityDTO dto2,
+            String targetUnit
     ) {
 
-        QuantityDTO result =
-                service.subtract(q1, q2, target);
+        Quantity<?> result =
+                service.subtract(
+                        dto1,
+                        dto2,
+                        targetUnit
+                );
 
-        System.out.println("Subtraction Result : " + result);
+        System.out.println(
+                "Subtraction Result : " + result
+        );
     }
 
     public void performDivision(
-            QuantityDTO q1,
-            QuantityDTO q2
+            QuantityDTO dto1,
+            QuantityDTO dto2
     ) {
 
         double result =
-                service.divide(q1, q2);
+                service.divide(dto1, dto2);
 
-        System.out.println("Division Result : " + result);
+        System.out.println(
+                "Division Result : " + result
+        );
     }
 }

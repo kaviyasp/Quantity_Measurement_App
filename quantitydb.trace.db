@@ -1,0 +1,3 @@
+2026-05-07 17:17:31.643812+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "QUANTITY_MEASUREMENTS" not found (this database is empty); SQL statement:
+INSERT INTO quantity_measurements (operation_type, measurement_type, value1, unit1, value2, unit2, result) VALUES (?, ?, ?, ?, ?, ?, ?) [42104-224]

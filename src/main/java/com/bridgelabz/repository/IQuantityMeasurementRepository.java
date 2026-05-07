@@ -6,7 +6,13 @@ import java.util.List;
 
 public interface IQuantityMeasurementRepository {
 
-    void save(QuantityMeasurementEntity entity);
+    void save(
+            QuantityMeasurementEntity entity
+    );
 
-    List<QuantityMeasurementEntity> findAll();
+    List<QuantityMeasurementEntity> getAllMeasurements();
+
+    void deleteAllMeasurements();
+
+    long getTotalCount();
 }

@@ -1,51 +1,93 @@
 package com.bridgelabz.entity;
 
-import java.io.Serializable;
+public class QuantityMeasurementEntity {
 
-public class QuantityMeasurementEntity implements Serializable {
+    private String operationType;
+    private String measurementType;
 
-    private static final long serialVersionUID = 1L;
+    private double value1;
+    private String unit1;
 
-    private String operation;
+    private double value2;
+    private String unit2;
+
     private String result;
-    private boolean error;
-    private String errorMessage;
 
-    public QuantityMeasurementEntity(String operation, String result) {
-        this.operation = operation;
+    public QuantityMeasurementEntity() {
+    }
+
+    public QuantityMeasurementEntity(
+            String operationType,
+            String measurementType,
+            double value1,
+            String unit1,
+            double value2,
+            String unit2,
+            String result
+    ) {
+
+        this.operationType = operationType;
+        this.measurementType = measurementType;
+        this.value1 = value1;
+        this.unit1 = unit1;
+        this.value2 = value2;
+        this.unit2 = unit2;
         this.result = result;
-        this.error = false;
     }
 
-    public QuantityMeasurementEntity(String operation, String errorMessage, boolean error) {
-        this.operation = operation;
-        this.errorMessage = errorMessage;
-        this.error = error;
+    public String getOperationType() {
+        return operationType;
     }
 
-    public String getOperation() {
-        return operation;
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
+
+    public String getMeasurementType() {
+        return measurementType;
+    }
+
+    public void setMeasurementType(String measurementType) {
+        this.measurementType = measurementType;
+    }
+
+    public double getValue1() {
+        return value1;
+    }
+
+    public void setValue1(double value1) {
+        this.value1 = value1;
+    }
+
+    public String getUnit1() {
+        return unit1;
+    }
+
+    public void setUnit1(String unit1) {
+        this.unit1 = unit1;
+    }
+
+    public double getValue2() {
+        return value2;
+    }
+
+    public void setValue2(double value2) {
+        this.value2 = value2;
+    }
+
+    public String getUnit2() {
+        return unit2;
+    }
+
+    public void setUnit2(String unit2) {
+        this.unit2 = unit2;
     }
 
     public String getResult() {
         return result;
     }
 
-    public boolean isError() {
-        return error;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    @Override
-    public String toString() {
-
-        if (error) {
-            return "ERROR : " + errorMessage;
-        }
-
-        return operation + " => " + result;
+    public void setResult(String result) {
+        this.result = result;
     }
 }
