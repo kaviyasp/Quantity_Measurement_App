@@ -1,91 +1,68 @@
 package com.bridgelabz.controller;
 
-import com.bridgelabz.Quantity;
+import com.bridgelabz.dto.OperationRequestDTO;
 import com.bridgelabz.dto.QuantityDTO;
 import com.bridgelabz.service.IQuantityMeasurementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/api/quantity")
 public class QuantityMeasurementController {
 
-    private final IQuantityMeasurementService service;
+    @Autowired
+    private IQuantityMeasurementService service;
 
-    public QuantityMeasurementController(
-            IQuantityMeasurementService service
-    ) {
-        this.service = service;
-    }
+    @PostMapping("/compare")
+    public boolean compare(@RequestBody OperationRequestDTO request) {
 
-    public void performComparison(
-            QuantityDTO dto1,
-            QuantityDTO dto2
-    ) {
-
-        boolean result =
-                service.compare(dto1, dto2);
-
-        System.out.println(
-                "Comparison Result : " + result
+        return service.compare(
+                request.getDto1(),
+                request.getDto2()
         );
     }
 
-    public void performConversion(
-            QuantityDTO dto,
-            String targetUnit
+    @PostMapping("/convert/{targetUnit}")
+    public String convert(
+            @RequestBody QuantityDTO dto,
+            @PathVariable String targetUnit
     ) {
 
-        Quantity<?> result =
-                service.convert(dto, targetUnit);
-
-        System.out.println(
-                "Conversion Result : " + result
-        );
+        return service.convert(dto, targetUnit).toString();
     }
 
-    public void performAddition(
-            QuantityDTO dto1,
-            QuantityDTO dto2,
-            String targetUnit
+    @PostMapping("/add/{targetUnit}")
+    public String add(
+            @RequestBody OperationRequestDTO request,
+            @PathVariable String targetUnit
     ) {
 
-        Quantity<?> result =
-                service.add(
-                        dto1,
-                        dto2,
-                        targetUnit
-                );
-
-        System.out.println(
-                "Addition Result : " + result
-        );
+        return service.add(
+                request.getDto1(),
+                request.getDto2(),
+                targetUnit
+        ).toString();
     }
 
-    public void performSubtraction(
-            QuantityDTO dto1,
-            QuantityDTO dto2,
-            String targetUnit
+    @PostMapping("/subtract/{targetUnit}")
+    public String subtract(
+            @RequestBody OperationRequestDTO request,
+            @PathVariable String targetUnit
     ) {
 
-        Quantity<?> result =
-                service.subtract(
-                        dto1,
-                        dto2,
-                        targetUnit
-                );
-
-        System.out.println(
-                "Subtraction Result : " + result
-        );
+        return service.subtract(
+                request.getDto1(),
+                request.getDto2(),
+                targetUnit
+        ).toString();
     }
 
-    public void performDivision(
-            QuantityDTO dto1,
-            QuantityDTO dto2
-    ) {
+    @PostMapping("/divide")
+    public double divide(@RequestBody OperationRequestDTO request) {
 
-        double result =
-                service.divide(dto1, dto2);
-
-        System.out.println(
-                "Division Result : " + result
+        return service.divide(
+                request.getDto1(),
+                request.getDto2()
         );
     }
 }

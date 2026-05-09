@@ -1,14 +1,29 @@
 package com.bridgelabz.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "quantity_measurements")
 public class QuantityMeasurementEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String operationType;
+
     private String measurementType;
 
-    private double value1;
+    private Double value1;
+
     private String unit1;
 
-    private double value2;
+    private Double value2;
+
     private String unit2;
 
     private String result;
@@ -19,13 +34,12 @@ public class QuantityMeasurementEntity {
     public QuantityMeasurementEntity(
             String operationType,
             String measurementType,
-            double value1,
+            Double value1,
             String unit1,
-            double value2,
+            Double value2,
             String unit2,
             String result
     ) {
-
         this.operationType = operationType;
         this.measurementType = measurementType;
         this.value1 = value1;
@@ -33,6 +47,14 @@ public class QuantityMeasurementEntity {
         this.value2 = value2;
         this.unit2 = unit2;
         this.result = result;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getOperationType() {
@@ -51,11 +73,11 @@ public class QuantityMeasurementEntity {
         this.measurementType = measurementType;
     }
 
-    public double getValue1() {
+    public Double getValue1() {
         return value1;
     }
 
-    public void setValue1(double value1) {
+    public void setValue1(Double value1) {
         this.value1 = value1;
     }
 
@@ -67,11 +89,11 @@ public class QuantityMeasurementEntity {
         this.unit1 = unit1;
     }
 
-    public double getValue2() {
+    public Double getValue2() {
         return value2;
     }
 
-    public void setValue2(double value2) {
+    public void setValue2(Double value2) {
         this.value2 = value2;
     }
 

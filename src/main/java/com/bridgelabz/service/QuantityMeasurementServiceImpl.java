@@ -1,18 +1,25 @@
 package com.bridgelabz.service;
 
-import com.bridgelabz.*;
+import com.bridgelabz.IMeasurable;
+import com.bridgelabz.LengthUnit;
+import com.bridgelabz.Quantity;
+import com.bridgelabz.TemperatureUnit;
+import com.bridgelabz.VolumeUnit;
+import com.bridgelabz.WeightUnit;
 import com.bridgelabz.dto.QuantityDTO;
 import com.bridgelabz.entity.QuantityMeasurementEntity;
 import com.bridgelabz.exception.QuantityMeasurementException;
-import com.bridgelabz.repository.IQuantityMeasurementRepository;
+import com.bridgelabz.repository.QuantityMeasurementRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QuantityMeasurementServiceImpl
         implements IQuantityMeasurementService {
 
-    private final IQuantityMeasurementRepository repository;
+    private final QuantityMeasurementRepository repository;
 
     public QuantityMeasurementServiceImpl(
-            IQuantityMeasurementRepository repository
+            QuantityMeasurementRepository repository
     ) {
         this.repository = repository;
     }
@@ -26,12 +33,16 @@ public class QuantityMeasurementServiceImpl
         try {
 
             IMeasurable unit1 =
-                    getUnit(dto1.getMeasurementType(),
-                            dto1.getUnit());
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            dto1.getUnit()
+                    );
 
             IMeasurable unit2 =
-                    getUnit(dto2.getMeasurementType(),
-                            dto2.getUnit());
+                    getUnit(
+                            dto2.getMeasurementType(),
+                            dto2.getUnit()
+                    );
 
             Quantity<IMeasurable> q1 =
                     new Quantity<>(
@@ -78,12 +89,16 @@ public class QuantityMeasurementServiceImpl
         try {
 
             IMeasurable sourceUnit =
-                    getUnit(dto.getMeasurementType(),
-                            dto.getUnit());
+                    getUnit(
+                            dto.getMeasurementType(),
+                            dto.getUnit()
+                    );
 
             IMeasurable target =
-                    getUnit(dto.getMeasurementType(),
-                            targetUnit);
+                    getUnit(
+                            dto.getMeasurementType(),
+                            targetUnit
+                    );
 
             Quantity<IMeasurable> quantity =
                     new Quantity<>(
@@ -100,7 +115,7 @@ public class QuantityMeasurementServiceImpl
                             dto.getMeasurementType(),
                             dto.getValue(),
                             dto.getUnit(),
-                            0,
+                            0.0,
                             targetUnit,
                             result.toString()
                     )
@@ -126,22 +141,34 @@ public class QuantityMeasurementServiceImpl
         try {
 
             IMeasurable unit1 =
-                    getUnit(dto1.getMeasurementType(),
-                            dto1.getUnit());
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            dto1.getUnit()
+                    );
 
             IMeasurable unit2 =
-                    getUnit(dto2.getMeasurementType(),
-                            dto2.getUnit());
+                    getUnit(
+                            dto2.getMeasurementType(),
+                            dto2.getUnit()
+                    );
 
             IMeasurable target =
-                    getUnit(dto1.getMeasurementType(),
-                            targetUnit);
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            targetUnit
+                    );
 
             Quantity<IMeasurable> q1 =
-                    new Quantity<>(dto1.getValue(), unit1);
+                    new Quantity<>(
+                            dto1.getValue(),
+                            unit1
+                    );
 
             Quantity<IMeasurable> q2 =
-                    new Quantity<>(dto2.getValue(), unit2);
+                    new Quantity<>(
+                            dto2.getValue(),
+                            unit2
+                    );
 
             Quantity<?> result =
                     q1.add(q2, target);
@@ -178,22 +205,34 @@ public class QuantityMeasurementServiceImpl
         try {
 
             IMeasurable unit1 =
-                    getUnit(dto1.getMeasurementType(),
-                            dto1.getUnit());
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            dto1.getUnit()
+                    );
 
             IMeasurable unit2 =
-                    getUnit(dto2.getMeasurementType(),
-                            dto2.getUnit());
+                    getUnit(
+                            dto2.getMeasurementType(),
+                            dto2.getUnit()
+                    );
 
             IMeasurable target =
-                    getUnit(dto1.getMeasurementType(),
-                            targetUnit);
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            targetUnit
+                    );
 
             Quantity<IMeasurable> q1 =
-                    new Quantity<>(dto1.getValue(), unit1);
+                    new Quantity<>(
+                            dto1.getValue(),
+                            unit1
+                    );
 
             Quantity<IMeasurable> q2 =
-                    new Quantity<>(dto2.getValue(), unit2);
+                    new Quantity<>(
+                            dto2.getValue(),
+                            unit2
+                    );
 
             Quantity<?> result =
                     q1.subtract(q2, target);
@@ -229,18 +268,28 @@ public class QuantityMeasurementServiceImpl
         try {
 
             IMeasurable unit1 =
-                    getUnit(dto1.getMeasurementType(),
-                            dto1.getUnit());
+                    getUnit(
+                            dto1.getMeasurementType(),
+                            dto1.getUnit()
+                    );
 
             IMeasurable unit2 =
-                    getUnit(dto2.getMeasurementType(),
-                            dto2.getUnit());
+                    getUnit(
+                            dto2.getMeasurementType(),
+                            dto2.getUnit()
+                    );
 
             Quantity<IMeasurable> q1 =
-                    new Quantity<>(dto1.getValue(), unit1);
+                    new Quantity<>(
+                            dto1.getValue(),
+                            unit1
+                    );
 
             Quantity<IMeasurable> q2 =
-                    new Quantity<>(dto2.getValue(), unit2);
+                    new Quantity<>(
+                            dto2.getValue(),
+                            unit2
+                    );
 
             double result =
                     q1.divide(q2);
@@ -275,16 +324,24 @@ public class QuantityMeasurementServiceImpl
         return switch (measurementType.toUpperCase()) {
 
             case "LENGTH" ->
-                    LengthUnit.valueOf(unit.toUpperCase());
+                    LengthUnit.valueOf(
+                            unit.toUpperCase()
+                    );
 
             case "WEIGHT" ->
-                    WeightUnit.valueOf(unit.toUpperCase());
+                    WeightUnit.valueOf(
+                            unit.toUpperCase()
+                    );
 
             case "VOLUME" ->
-                    VolumeUnit.valueOf(unit.toUpperCase());
+                    VolumeUnit.valueOf(
+                            unit.toUpperCase()
+                    );
 
             case "TEMPERATURE" ->
-                    TemperatureUnit.valueOf(unit.toUpperCase());
+                    TemperatureUnit.valueOf(
+                            unit.toUpperCase()
+                    );
 
             default ->
                     throw new IllegalArgumentException(
